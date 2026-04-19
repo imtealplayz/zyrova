@@ -1,0 +1,227 @@
+[
+  {
+    "id": 1,
+    "name": "Zyrova AirPods Pro X",
+    "description": "Next-gen wireless earbuds with adaptive noise cancellation, spatial audio, and 36-hour battery life. Crafted with premium titanium housing for durability and elegance.",
+    "price": 249.99,
+    "category": "Audio",
+    "image": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&q=80",
+    "rating": 4.8
+  },
+  {
+    "id": 2,
+    "name": "Zyrova UltraBook 15",
+    "description": "A featherlight 15-inch powerhouse featuring a 4K OLED display, 32GB RAM, and a 12-hour battery. Engineered for professionals who demand peak performance.",
+    "price": 1899.99,
+    "category": "Laptops",
+    "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=80",
+    "rating": 4.9
+  },
+  {
+    "id": 3,
+    "name": "Zyrova Watch Series 7",
+    "description": "A precision smartwatch with health monitoring, GPS, ECG, and a stunning always-on AMOLED display. Titanium case, sapphire glass.",
+    "price": 499.99,
+    "category": "Wearables",
+    "image": "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&q=80",
+    "rating": 4.7
+  },
+  {
+    "id": 4,
+    "name": "Zyrova Tablet Pro 12",
+    "description": "A 12.9-inch tablet with a liquid retina display, M3 chip, and 5G connectivity. Perfect for creators and professionals on the go.",
+    "price": 1099.99,
+    "category": "Tablets",
+    "image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&q=80",
+    "rating": 4.6
+  },
+  {
+    "id": 5,
+    "name": "Zyrova MechKey Pro",
+    "description": "A wireless mechanical keyboard with custom Zyrova switches, per-key RGB, aluminum frame, and 80-hour battery life. Built for endurance.",
+    "price": 179.99,
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=600&q=80",
+    "rating": 4.5
+  },
+  {
+    "id": 6,
+    "name": "Zyrova ProMouse X1",
+    "description": "Ergonomic wireless mouse with 25,600 DPI sensor, 8 programmable buttons, and 70-hour battery. Precision engineered for power users.",
+    "price": 89.99,
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&q=80",
+    "rating": 4.4
+  },
+  {
+    "id": 7,
+    "name": "Zyrova NeckBand Elite",
+    "description": "Premium neckband earphones with hybrid ANC, 20-hour playback, and audiophile-grade tuning. Titanium build, magnetic earbuds.",
+    "price": 129.99,
+    "category": "Audio",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80",
+    "rating": 4.3
+  },
+  {
+    "id": 8,
+    "name": "Zyrova GamingPhone Z",
+    "description": "144Hz AMOLED display, Snapdragon 8 Gen 3, 6000mAh battery with 120W charging. Designed for mobile gaming supremacy.",
+    "price": 999.99,
+    "category": "Phones",
+    "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&q=80",
+    "rating": 4.8
+  },
+  {
+    "id": 9,
+    "name": "Zyrova 4K Monitor 27\"",
+    "description": "27-inch IPS 4K monitor with 144Hz refresh rate, 1ms response time, HDR600, and USB-C power delivery. The studio-grade display.",
+    "price": 749.99,
+    "category": "Monitors",
+    "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&q=80",
+    "rating": 4.7
+  },
+  {
+    "id": 10,
+    "name": "Zyrova SoundBar Z200",
+    "description": "Dolby Atmos soundbar with dedicated woofer, spatial audio processing, and HDMI eARC. Transforms your living room into a cinema.",
+    "price": 349.99,
+    "category": "Audio",
+    "image": "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=600&q=80",
+    "rating": 4.6
+  },
+  {
+    "id": 11,
+    "name": "Zyrova StreamCam 4K",
+    "description": "4K 60fps webcam with AI-powered autofocus, dual noise-cancelling mics, and HDR. Perfect for streaming and video conferencing.",
+    "price": 199.99,
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1587826080692-f439cd0b70da?w=600&q=80",
+    "rating": 4.5
+  },
+  {
+    "id": 12,
+    "name": "Zyrova PowerHub 140W",
+    "description": "140W 6-port USB-C/A charging hub with GaN technology, compact design, and simultaneous fast-charging for all your devices.",
+    "price": 79.99,
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
+    "rating": 4.4
+  },
+  {
+    "id": 13,
+    "name": "Zyrova FitBand Ultra",
+    "description": "Advanced fitness tracker with SpO2, continuous heart rate, sleep scoring, stress monitor, and 14-day battery. Your 24/7 health partner.",
+    "price": 159.99,
+    "category": "Wearables",
+    "image": "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600&q=80",
+    "rating": 4.3
+  },
+  {
+    "id": 14,
+    "name": "Zyrova PortableSSD 2TB",
+    "description": "2TB NVMe portable SSD with USB 3.2 Gen 2, 2000MB/s read speed, shockproof aluminum casing, and hardware encryption.",
+    "price": 219.99,
+    "category": "Storage",
+    "image": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&q=80",
+    "rating": 4.8
+  },
+  {
+    "id": 15,
+    "name": "Zyrova OpenEar Z1",
+    "description": "Open-ear bone conduction headphones with IP68 waterproofing, 12-hour playback, and Bluetooth 5.3. Built for outdoor athletes.",
+    "price": 149.99,
+    "category": "Audio",
+    "image": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&q=80",
+    "rating": 4.2
+  },
+  {
+    "id": 16,
+    "name": "Zyrova ProPad S11",
+    "description": "11-inch AMOLED tablet with 120Hz display, 8-core processor, 5G, S-Pen support, and a 10,000mAh battery. Mid-range excellence.",
+    "price": 649.99,
+    "category": "Tablets",
+    "image": "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&q=80",
+    "rating": 4.5
+  },
+  {
+    "id": 17,
+    "name": "Zyrova SlimBook Air",
+    "description": "Ultra-thin 13-inch laptop at 0.99kg, OLED FHD display, 16GB RAM, all-day 14-hour battery. Redefined portability.",
+    "price": 1299.99,
+    "category": "Laptops",
+    "image": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&q=80",
+    "rating": 4.7
+  },
+  {
+    "id": 18,
+    "name": "Zyrova DeskPhone V2",
+    "description": "Flagship smartphone with a 6.7-inch dynamic AMOLED, periscope telephoto camera, 100W wired charging, and 50W wireless charging.",
+    "price": 1199.99,
+    "category": "Phones",
+    "image": "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600&q=80",
+    "rating": 4.9
+  },
+  {
+    "id": 19,
+    "name": "Zyrova CurveScreen 34\"",
+    "description": "34-inch ultrawide curved QHD display, 165Hz, 1ms, HDR400, USB-C 90W. Immerse yourself in the workspace of the future.",
+    "price": 899.99,
+    "category": "Monitors",
+    "image": "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=600&q=80",
+    "rating": 4.6
+  },
+  {
+    "id": 20,
+    "name": "Zyrova SmartDock Pro",
+    "description": "12-in-1 Thunderbolt 4 docking station with dual 4K output, 96W PD, 2.5G LAN, and SD card reader. Your universal workspace hub.",
+    "price": 259.99,
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=600&q=80",
+    "rating": 4.5
+  },
+  {
+    "id": 21,
+    "name": "Zyrova ClearBuds Z3",
+    "description": "Transparent-style TWS earbuds with 10mm custom drivers, 30-hour total battery, wireless charging case, and IPX5 water resistance.",
+    "price": 99.99,
+    "category": "Audio",
+    "image": "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=600&q=80",
+    "rating": 4.3
+  },
+  {
+    "id": 22,
+    "name": "Zyrova StudioMic X",
+    "description": "USB condenser microphone with cardioid pattern, 192kHz/32-bit resolution, built-in headphone amp, and zero-latency monitoring.",
+    "price": 139.99,
+    "category": "Audio",
+    "image": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&q=80",
+    "rating": 4.6
+  },
+  {
+    "id": 23,
+    "name": "Zyrova GlassDesk Pad",
+    "description": "Premium tempered glass desk pad with non-slip base, cable organizer, and QI wireless charging zone built in. Redefine your workspace.",
+    "price": 69.99,
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600&q=80",
+    "rating": 4.2
+  },
+  {
+    "id": 24,
+    "name": "Zyrova AirRouter Z6",
+    "description": "Wi-Fi 6E tri-band mesh router with 10Gbps throughput, AI QoS, VPN server, and parental controls. Built for smart homes.",
+    "price": 299.99,
+    "category": "Networking",
+    "image": "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=600&q=80",
+    "rating": 4.7
+  },
+  {
+    "id": 25,
+    "name": "Zyrova NightVision Cam",
+    "description": "2K smart home security camera with color night vision, 360° pan-tilt, AI motion detection, and local + cloud storage options.",
+    "price": 89.99,
+    "category": "Smart Home",
+    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&q=80",
+    "rating": 4.4
+  }
+]
