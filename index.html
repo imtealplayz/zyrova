@@ -6,18 +6,22 @@
   <title>Zyrova — Premium Tech Store</title>
   <meta name="description" content="Zyrova — Discover premium tech products. Laptops, Audio, Wearables, and more.">
   <link rel="stylesheet" href="style.css">
+  <!-- Favicon using emoji for demo -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 </head>
 <body>
 
+  <!-- ── NAVBAR ─────────────────────────────────────── -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="container nav-inner">
 
+      <!-- Logo -->
       <a href="index.html" class="nav-logo" aria-label="Zyrova Home">
         <img src="Brand_logo.jpg" alt="Zyrova Logo" onerror="this.style.display='none'">
         <span class="nav-logo-text">Zyrova</span>
       </a>
       <div class="nav-divider"></div>
+      <!-- Search bar (desktop) -->
       <div class="nav-search" role="search">
         <input
           type="search"
@@ -33,6 +37,7 @@
         </button>
       </div>
 
+      <!-- Action icons -->
       <div class="nav-actions">
         <a href="wishlist.html" class="nav-icon-btn" aria-label="Wishlist">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -52,8 +57,10 @@
     </div>
   </nav>
 
+  <!-- ── PAGE CONTENT ───────────────────────────────── -->
   <main class="page-content">
 
+    <!-- HERO -->
     <section class="hero" aria-label="Hero banner">
       <div class="hero-bg" aria-hidden="true">
         <div class="hero-glow"></div>
@@ -98,6 +105,7 @@
       </div>
     </section>
 
+    <!-- PRODUCTS SECTION -->
     <section class="section" id="products-section">
       <div class="container">
         <div class="section-header">
@@ -105,6 +113,7 @@
             <h2 class="section-title">Our Collection</h2>
             <p class="section-sub">Handpicked tech for the discerning buyer.</p>
           </div>
+          <!-- Desktop search in section -->
           <div class="nav-search" style="max-width:280px;display:none" id="section-search-wrap">
             <input type="search" id="search-input" placeholder="Filter products…" autocomplete="off">
             <button class="nav-search-btn" aria-label="Search">
@@ -113,16 +122,20 @@
           </div>
         </div>
 
+        <!-- Category Filter -->
         <div class="category-bar" id="category-bar" role="group" aria-label="Filter by category"></div>
 
+        <!-- Products Grid -->
         <div class="products-grid" id="products-grid" aria-label="Products grid"></div>
 
+        <!-- Pagination -->
         <div class="pagination" id="pagination" aria-label="Pagination"></div>
       </div>
     </section>
 
   </main>
 
+  <!-- ── FOOTER ──────────────────────────────────────── -->
   <footer class="footer" role="contentinfo">
     <div class="container footer-inner">
       <div class="footer-logo">
@@ -138,6 +151,7 @@
     </div>
   </footer>
 
+  <!-- Toast container -->
   <div id="toast-container" role="status" aria-live="polite"></div>
 
   <script src="script.js"></script>
