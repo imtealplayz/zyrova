@@ -415,7 +415,92 @@ async function initIndex() {
 
 /* ============================================================
    PRODUCT DETAIL PAGE — INIT
+   Supports: images[] array (up to 5), reviews[], gallery thumbnails
    ============================================================ */
+
+/** Build star rating HTML for reviews (larger stars) */
+function renderStarsLg(rating) {
+  const full  = Math.floor(rating);
+  const half  = rating % 1 >= 0.5 ? 1 : 0;
+  const empty = 5 - full - half;
+  let html = '<div class="stars stars-lg">';
+  for (let i = 0; i < full;  i++) html += starSVG('full');
+  if (half)                        html += starSVG('half');
+  for (let i = 0; i < empty; i++) html += starSVG('empty');
+  html += '</div>';
+  return html;
+}
+
+/** Build gallery thumbnail HTML — only renders images that exist (max 5) */
+function buildGallery(images) {
+  if (!images || images.length === 0) return '';
+  // cap at 5
+  const imgs = images.slice(0, 5);
+  if (imgs.length <= 1) return ''; // no thumbnails if only 1 image
+  return imgs.map((src, i) => `
+    <button class="gallery-thumb ${i === 0 ? 'active' : ''}" data-idx="${i}" aria-label="View image ${i + 1}">
+      <img src="${src}" alt="Product view ${i + 1}" loading="lazy"
+           onerror="this.parentElement.style.display='none'">
+    </button>
+  `).join('');
+}
+
+/** Build reviews HTML from product.reviews array */
+function buildReviews(reviews) {
+  if (!reviews || reviews.length === 0) return '';
+  const avg = (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1);
+
+  // Rating distribution bars
+  const dist = [5,4,3,2,1].map(star => {
+    const count = reviews.filter(r => r.rating === star).length;
+    const pct   = Math.round((count / reviews.length) * 100);
+    return `
+      <div class="rating-bar-row">
+        <span class="rating-bar-label">${star}</span>
+        <svg width="10" height="10" viewBox="0 0 20 20" class="star-full" style="flex-shrink:0">
+          <path d="M10 1l2.4 6.8H19l-5.4 4 2 6.6L10 14.4l-5.6 4 2-6.6L1 7.8h6.6z"/>
+        </svg>
+        <div class="rating-bar-track"><div class="rating-bar-fill" style="width:${pct}%"></div></div>
+        <span class="rating-bar-pct">${pct}%</span>
+      </div>`;
+  }).join('');
+
+  const cards = reviews.map(r => `
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">${r.avatar}</div>
+        <div class="review-meta">
+          <div class="review-name">
+            ${r.name}
+            ${r.verified ? '<span class="review-verified">✓ Verified</span>' : ''}
+          </div>
+          <div class="review-date">${r.date}</div>
+        </div>
+        <div class="review-stars">${renderStarsLg(r.rating)}</div>
+      </div>
+      <p class="review-text">${r.text}</p>
+    </div>
+  `).join('');
+
+  return `
+    <section class="reviews-section">
+      <div class="reviews-header">
+        <h2 class="reviews-title">Customer Reviews</h2>
+        <div class="reviews-summary">
+          <div class="reviews-avg">
+            <span class="reviews-avg-num">${avg}</span>
+            <div>
+              ${renderStarsLg(parseFloat(avg))}
+              <span class="reviews-count">${reviews.length} review${reviews.length !== 1 ? 's' : ''}</span>
+            </div>
+          </div>
+          <div class="rating-bars">${dist}</div>
+        </div>
+      </div>
+      <div class="reviews-list">${cards}</div>
+    </section>
+  `;
+}
 
 async function initProductDetail() {
   const container = document.getElementById('product-detail');
@@ -432,19 +517,34 @@ async function initProductDetail() {
     const product  = products.find(p => p.id === id);
     if (!product) { container.innerHTML = '<p>Product not found.</p>'; return; }
 
-    state.allProducts = products; // needed for isWishlisted
+    state.allProducts = products;
     const wished = isWishlisted(product.id);
     let qty = 1;
+
+    // Resolve images: prefer images[] array, fallback to image string
+    const images = (Array.isArray(product.images) && product.images.length > 0)
+      ? product.images.slice(0, 5)
+      : [product.image];
+    const primaryImg = images[0];
+    const fallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80';
 
     container.innerHTML = `
       <button class="back-btn" onclick="history.back()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
         Back
       </button>
+
       <div class="detail-grid">
-        <div class="detail-image-wrap">
-          <img src="${product.image}" alt="${product.name}" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80'">
+        <!-- Gallery -->
+        <div class="detail-gallery">
+          <div class="detail-image-wrap">
+            <span class="detail-badge-tag">${product.category}</span>
+            <img id="detail-main-img" src="${primaryImg}" alt="${product.name}" onerror="this.src='${fallback}'">
+          </div>
+          ${images.length > 1 ? `<div class="gallery-thumbs">${buildGallery(images)}</div>` : ''}
         </div>
+
+        <!-- Info -->
         <div class="detail-info">
           <span class="detail-category">${product.category}</span>
           <h1 class="detail-name">${product.name}</h1>
@@ -456,7 +556,24 @@ async function initProductDetail() {
           <div class="detail-divider"></div>
           <p class="detail-desc">${product.description}</p>
 
-          <label style="font-size:13px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:10px;">Quantity</label>
+          <div class="detail-trust">
+            <div class="trust-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              2-Year Warranty
+            </div>
+            <div class="trust-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              Free Returns
+            </div>
+            <div class="trust-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Secure Checkout
+            </div>
+          </div>
+
+          <div class="detail-divider"></div>
+
+          <label class="qty-label">Quantity</label>
           <div class="qty-control">
             <button class="qty-btn" id="qty-minus">−</button>
             <span class="qty-value" id="qty-val">1</span>
@@ -465,19 +582,45 @@ async function initProductDetail() {
 
           <div class="detail-actions">
             <button class="btn btn-primary btn-lg" id="detail-add-cart">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
               Add to Cart
             </button>
-            <button class="btn btn-secondary btn-lg" id="detail-wishlist" style="${wished ? 'color:var(--red);border-color:rgba(239,68,68,.3)' : ''}">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="${wished ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <button class="btn btn-secondary btn-lg" id="detail-wishlist"
+              style="${wished ? 'color:var(--red);border-color:rgba(239,68,68,.3)' : ''}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="${wished ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
               ${wished ? 'Wishlisted' : 'Wishlist'}
             </button>
           </div>
         </div>
       </div>
+
+      <!-- Reviews -->
+      ${buildReviews(product.reviews)}
     `;
 
-    // Qty controls
+    /* ── Gallery thumbnail switching ── */
+    container.querySelectorAll('.gallery-thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        const idx     = parseInt(thumb.dataset.idx);
+        const mainImg = document.getElementById('detail-main-img');
+        if (mainImg && images[idx]) {
+          mainImg.style.opacity = '0';
+          setTimeout(() => {
+            mainImg.src = images[idx];
+            mainImg.style.opacity = '1';
+          }, 150);
+        }
+        container.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      });
+    });
+
+    /* ── Qty controls ── */
     document.getElementById('qty-minus').addEventListener('click', () => {
       qty = Math.max(1, qty - 1);
       document.getElementById('qty-val').textContent = qty;
@@ -487,18 +630,18 @@ async function initProductDetail() {
       document.getElementById('qty-val').textContent = qty;
     });
 
-    // Add to cart
+    /* ── Add to cart ── */
     document.getElementById('detail-add-cart').addEventListener('click', () => {
       addToCart(product, qty);
     });
 
-    // Wishlist
+    /* ── Wishlist ── */
     const wishBtn = document.getElementById('detail-wishlist');
     wishBtn.addEventListener('click', () => {
       const added = toggleWishlist(product);
       const svg   = wishBtn.querySelector('svg');
       svg.setAttribute('fill', added ? 'currentColor' : 'none');
-      wishBtn.style.color      = added ? 'var(--red)' : '';
+      wishBtn.style.color       = added ? 'var(--red)' : '';
       wishBtn.style.borderColor = added ? 'rgba(239,68,68,.3)' : '';
       wishBtn.innerHTML = wishBtn.innerHTML.replace(/Wishlisted|Wishlist/, added ? 'Wishlisted' : 'Wishlist');
     });
@@ -691,7 +834,7 @@ function initCheckout() {
 
   const cart = getCart();
   if (cart.length === 0) {
-    orderEl.innerHTML = '<p style="color:var(--text-muted)">Your cart is empty. <a href="index.html" style="color:var(--blue)">Shop now →</a></p>';
+    orderEl.innerHTML = '<p style="color:var(--t2)">Your cart is empty. <a href="index.html" style="color:var(--blue)">Shop now →</a></p>';
     return;
   }
 
